@@ -2,47 +2,119 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Access: Camden County</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 40px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        p {
+            margin: 15px 0;
+        }
+        em {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #666;
+        }
+        ul {
+            margin: 20px 0;
+        }
+        li {
+            margin: 8px 0;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 40px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+        }
+        strong {
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Food Access Analysis: Camden County, NJ</h1>
-        <p>By Vincent Lu & Ahmad Shahbaz | Rutgers 34:970:595: Command-Line GIS</p>
+        <p><strong>Authors:</strong> Vincent Lu & Ahmad Shahbaz<br>
+        <strong>Course:</strong> Command-Line GIS (Rutgers 34:970:595, Fall 2025)</p>
     </header>
     
+    <hr>
+    
     <section id="introduction">
-        <h2>Project Overview</h2>
+        <h2>1. Project Overview</h2>
         <p>This project explores the intersection of socioeconomic status and food access in Camden County, NJ, identifying areas where low income and low physical access to groceries overlap.</p>
     </section>
     
     <section id="data-methodology">
-        <h2>Data Methodology</h2>
-        <p><strong>Sources & Preparation:</strong> Data was sourced from the <strong>USDA Food Access Research Atlas</strong> (2019), the <strong>US Census Bureau</strong> (ACS 5-Year Estimates, 2015-2019), and <strong>NJ Transit Open Data</strong>. Census data was accessed via the <code>tidycensus</code> and <code>cenpy</code> libraries.</p>
+        <h2>2. Data Methodology</h2>
         
-        <p><strong>Processing:</strong> The original data was in GeoJSON and CSV formats[cite: 17]. To make the data mappable, we performed a <strong>spatial join</strong> between NJ Transit bus stop point data and Census Tract polygons to calculate transit density. We also aggregated retail points from OpenStreetMap using <code>osmnx</code>.</p>
+        <h3>Sources & Preparation</h3>
+        <p>Data was sourced from the <strong>USDA Food Access Research Atlas</strong> (2019), the <strong>US Census Bureau</strong> (ACS 5-Year Estimates, 2015-2019), and <strong>NJ Transit Open Data</strong>. Census data was accessed via the <code>tidycensus</code> and <code>cenpy</code> libraries.</p>
         
-        <p><strong>Quality & Reliability:</strong> We addressed data quality by filtering for <strong>Coefficient of Variation (CV)</strong>. Any Census variables with a $CV \ge 40$ were symbolized as "unreliable" or excluded to ensure statistical integrity[cite: 18, 21].</p>
+        <h3>Processing</h3>
+        <p>The original data was in GeoJSON and CSV formats. To make the data mappable, we performed a <strong>spatial join</strong> between NJ Transit bus stop point data and Census Tract polygons to calculate transit density. We also aggregated retail points from OpenStreetMap using <code>osmnx</code>.</p>
+        
+        <h3>Quality & Reliability</h3>
+        <p>We addressed data quality by filtering for <strong>Coefficient of Variation (CV)</strong>. Any Census variables with a CV ≥ 40 were symbolized as "unreliable" or excluded to ensure statistical integrity.</p>
     </section>
     
     <section id="static-maps">
-        <h2>Static Analysis</h2>
+        <h2>3. Static Analysis</h2>
         <p>These curated views provide a baseline for understanding demographic distribution in the county.</p>
         
-        <h3>Median Income & Census Tracts</h3>
+        <h3>Static Map 1: Median Income & Census Tracts</h3>
         <img src="map1_median_income.png" alt="Map of Median Income by Census Tract">
-        <p><em>Figure 1: Median household income by tract. Hatched areas represent data with high CV or missing values.</em></p>
+        <em>Figure 1: Median household income by tract. Hatched areas represent data with high CV or missing values.</em>
         
-        <h3>Demographics & Transit Access</h3>
+        <h3>Static Map 2: Demographics & Transit Access</h3>
         <img src="map3_vehicle_access_transit.png" alt="Map of Vehicle Access and Transit">
-        <p><em>Figure 2: This map uses a spatial join to show the density of transit stops relative to households without vehicle access.</em></p>
+        <em>Figure 2: This map uses a spatial join to show the density of transit stops relative to households without vehicle access.</em>
     </section>
     
     <section id="interactive-map">
-        <h2>Interactive Exploration</h2>
+        <h2>4. Interactive Exploration</h2>
         <p>Use the map below to explore specific data points, including bus stop locations and specific tract-level poverty rates.</p>
         
         <iframe src="interactive_map2_multilayer.html" title="Interactive Food Access Map"></iframe>
         
+        <p><strong>Map Features:</strong></p>
         <ul>
             <li><strong>Hover:</strong> View quick stats on poverty rates.</li>
             <li><strong>Click:</strong> View detailed demographic breakdowns and transit counts.</li>
@@ -52,7 +124,7 @@
     
     <footer>
         <hr>
-        <p>Final Project - Fall 2025</p>
+        <p><em>Final Project - Fall 2025</em></p>
     </footer>
 </body>
 </html>

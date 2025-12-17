@@ -1,93 +1,177 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Food Deserts in Camden County</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Access Analysis: Camden County</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f4f4; color: #333; }
-        .header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
-        .container { max-width: 1100px; margin: 20px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        h1 { margin: 0; }
-        h2 { border-bottom: 2px solid #e74c3c; padding-bottom: 10px; color: #e74c3c; margin-top: 40px; }
-        h3 { color: #2c3e50; margin-top: 20px; margin-bottom: 5px;}
         
-        /* Grid for Static Maps */
-        .static-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
-        .static-card { background: #fff; padding: 10px; border: 1px solid #eee; }
-        .static-card img { width: 100%; height: auto; border: 1px solid #ddd; }
-        .static-card p { font-size: 0.9em; color: #666; text-align: center; margin-top: 5px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #ffffff;
+        }
 
-        .map-wrapper { border: 1px solid #ddd; margin-bottom: 30px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
-        .findings { background-color: #e8f6f3; padding: 15px; border-left: 5px solid #1abc9c; margin-top: 20px; }
-        .footer { text-align: center; font-size: 0.8em; color: #777; margin-top: 40px; }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+            color: #000;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 50px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #000;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: #444;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .figure-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eee;
+        }
+
+        .caption {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin-bottom: 40px;
+        }
+        
+        ul {
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+
+
+        footer {
+            margin-top: 80px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            font-size: 0.8em;
+            color: #888;
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Food Access Analysis: Camden County, NJ</h1>
-        <p>A geospatial analysis of poverty, demographics, and transit access</p>
+    <h1>Food Access Analysis: Camden County, NJ</h1>
+    <div class="subtitle">
+        Vincent Lu & Ahmad Shahbaz | Rutgers University 34:970:595 | Fall 2025
     </div>
 
-    <div class="container">
-        
-        <h2>Project Overview</h2>
-        <p>This project examines "Food Deserts" in Camden County—areas defined by the USDA as having both low income and low access to nutritious food. By overlaying demographic and transit data, we attempt to understand the characteristics of these communities.</p>
+    <h2>1. Introduction</h2>
+    <p>
+        This project examines "Food Deserts" in Camden County—areas defined by the USDA as having both low income 
+        and low access to nutritious food. By overlaying demographic and transit data, we attempt to understand 
+        the characteristics of these communities and identify gaps in the local infrastructure.
+    </p>
 
-        <h2>1. Static Analysis</h2>
-        <p>The following series of maps breaks down the correlation between socioeconomic factors and food access.</p>
-        
-        <div class="static-grid">
-            <div class="static-card">
-                <h3>Median Income</h3>
-                <img src="map1_median_income.png" alt="Median Income Map">
-                <p>Distribution of household income across tracts.</p>
-            </div>
-            <div class="static-card">
-                <h3>Black Population</h3>
-                <img src="map2_black_population.png" alt="Black Population Map">
-                <p>Demographic concentration of Black residents.</p>
-            </div>
-            <div class="static-card">
-                <h3>Vehicle Access & Transit</h3>
-                <img src="map3_vehicle_access_transit.png" alt="Vehicle Access Map">
-                <p>Households without vehicles vs. transit availability.</p>
-            </div>
-            <div class="static-card">
-                <h3>Grocery Stores (OSM)</h3>
-                <img src="map4_grocery_stores_osm.png" alt="Grocery Stores Map">
-                <p>Locations of food retail points from OpenStreetMap.</p>
-            </div>
-        </div>
+    <h2>2. Data Sources & Methodology</h2>
+    <p>
+        <strong>Data Sources:</strong> The analysis relies on three primary datasets. First, <strong>USDA Food Access Research Atlas</strong> data 
+        was used to identify census tracts designated as food deserts based on income and distance to supermarkets. 
+        Second, <strong>US Census Bureau (ACS 2019)</strong> data provided demographic context, specifically median household income 
+        and racial composition. Finally, <strong>NJ Transit Open Data</strong> was utilized to plot bus stop locations 
+        to analyze public transportation accessibility in these high-need areas.
+    </p>
+    <p>
+        <strong>Methodology:</strong> Data was processed using Python (Pandas/Geopandas). We merged the USDA food desert 
+        flags with Census shapefiles to create the base choropleth layers. Demographic variables were normalized 
+        and mapped to visualize correlations between race, income, and food access. NJ Transit stops were overlaid 
+        as point data to calculate the density of transit options within identified food deserts.
+    </p>
 
-        <h2>2. Interactive Maps</h2>
-        
-        <h3>Map 1: Classification Overview</h3>
-        <p>This map provides a high-level view of food desert classifications.</p>
-        <div class="map-wrapper">
-            <iframe src="interactive_map1_classification.html" width="100%" height="600px" style="border:none;"></iframe>
-        </div>
+    <h2>3. Static Analysis</h2>
+    <p>The following maps visualize the spatial distribution of key socioeconomic variables across the county.</p>
 
-        <h3>Map 2: Multi-Layer Deep Dive</h3>
-        <p>Explore the relationships between poverty, demographics, and bus stops. Use the layer control (top right) to toggle variables.</p>
-        <div class="map-wrapper">
-            <iframe src="interactive_map2_multilayer.html" width="100%" height="650px" style="border:none;"></iframe>
-        </div>
-
-        <div class="findings">
-            <h3>Key Findings</h3>
-            <ul>
-                <li><strong>Correlation:</strong> There is a strong correlation between food desert status and poverty rate in Camden County.</li>
-                <li><strong>Demographics:</strong> Food deserts in this region have a significantly higher percentage of Black residents compared to non-desert tracts.</li>
-                <li><strong>Transit Paradox:</strong> While the urban center has the highest density of bus stops, it also contains the most food deserts, suggesting that physical proximity to transit does not guarantee food security.</li>
-            </ul>
-        </div>
-
-        <div class="footer">
-            <p>Created by Vincent Lu & Ahmad Shahbaz | Rutgers University 34:970:595 | Fall 2025</p>
-            <p>Data Sources: USDA Food Access Research Atlas, US Census Bureau (ACS 2019), NJ Transit Open Data</p>
-        </div>
+    <div class="figure-container">
+        <h3>Figure 1: Median Income</h3>
+        <img src="map1_median_income.png" alt="Median Income Map">
+        <div class="caption">Distribution of household income. Lower income tracts correlate strongly with food desert status.</div>
     </div>
+
+    <div class="figure-container">
+        <h3>Figure 2: Demographic Concentration</h3>
+        <img src="map2_black_population.png" alt="Black Population Map">
+        <div class="caption">Percentage of Black residents per tract.</div>
+    </div>
+
+    <div class="figure-container">
+        <h3>Figure 3: Vehicle Access</h3>
+        <img src="map3_vehicle_access_transit.png" alt="Vehicle Access Map">
+        <div class="caption">Households without vehicle access overlaid with transit routes.</div>
+    </div>
+
+    <div class="figure-container">
+        <h3>Figure 4: Grocery Infrastructure</h3>
+        <img src="map4_grocery_stores_osm.png" alt="Grocery Stores Map">
+        <div class="caption">Location of grocery stores derived from OpenStreetMap data.</div>
+    </div>
+
+    <h2>4. Interactive Maps</h2>
+    
+    <h3>Map 1: Food Desert Classification</h3>
+    <p>An interactive overview of tracts classified as food deserts.</p>
+    <div class="map-container">
+        <iframe src="interactive_map1_classification.html" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+    <h3>Map 2: Multi-Layer Analysis</h3>
+    <p>
+        Toggle between layers to explore the relationship between poverty rates, demographic makeup, 
+        and bus stop density. (Use the layer control in the top-right corner).
+    </p>
+    <div class="map-container">
+        <iframe src="interactive_map2_multilayer.html" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+    <h2>5. Key Findings</h2>
+    <ul>
+        <li><strong>Correlation:</strong> There is a definitive spatial overlap between low-income tracts and food deserts.</li>
+        <li><strong>Demographics:</strong> Food deserts in Camden County disproportionately affect neighborhoods with higher percentages of Black residents.</li>
+        <li><strong>The Transit Paradox:</strong> While the urban center of Camden has the highest density of bus stops, it also contains the highest concentration of food deserts. This suggests that while transit is <em>available</em>, it may not effectively connect residents to nutritious food sources outside their immediate neighborhood.</li>
+    </ul>
 
 </body>
 </html>

@@ -65,15 +65,11 @@
             font-style: italic;
             color: #666;
             font-size: 0.95em;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 30px 0;
-        }
-        .grid-item img {
+            display: block;
             margin-top: 10px;
+        }
+        .map-section {
+            margin: 40px 0;
         }
     </style>
 </head>
@@ -95,27 +91,28 @@
         <h2>2. Static Analysis</h2>
         <p>The following series of maps breaks down the correlation between socioeconomic factors and food access.</p>
         
-        <div class="grid">
-            <div class="grid-item">
-                <h3>Median Income</h3>
-                <img src="map1_median_income.png" alt="Median Income Map">
-                <em>Distribution of household income across tracts.</em>
-            </div>
-            <div class="grid-item">
-                <h3>Black Population</h3>
-                <img src="map2_black_population.png" alt="Black Population Map">
-                <em>Demographic concentration of Black residents.</em>
-            </div>
-            <div class="grid-item">
-                <h3>Vehicle Access & Transit</h3>
-                <img src="map3_vehicle_access_transit.png" alt="Vehicle Access Map">
-                <em>Households without vehicles vs. transit availability.</em>
-            </div>
-            <div class="grid-item">
-                <h3>Grocery Stores (OSM)</h3>
-                <img src="map4_grocery_stores_osm.png" alt="Grocery Stores Map">
-                <em>Locations of food retail points from OpenStreetMap.</em>
-            </div>
+        <div class="map-section">
+            <h3>Median Income</h3>
+            <img src="map1_median_income.png" alt="Median Income Map">
+            <em>Distribution of household income across tracts.</em>
+        </div>
+        
+        <div class="map-section">
+            <h3>Black Population</h3>
+            <img src="map2_black_population.png" alt="Black Population Map">
+            <em>Demographic concentration of Black residents.</em>
+        </div>
+        
+        <div class="map-section">
+            <h3>Vehicle Access & Transit</h3>
+            <img src="map3_vehicle_access_transit.png" alt="Vehicle Access Map">
+            <em>Households without vehicles vs. transit availability.</em>
+        </div>
+        
+        <div class="map-section">
+            <h3>Grocery Stores (OSM)</h3>
+            <img src="map4_grocery_stores_osm.png" alt="Grocery Stores Map">
+            <em>Locations of food retail points from OpenStreetMap.</em>
         </div>
     </section>
     

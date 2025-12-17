@@ -129,9 +129,19 @@
     </section>
     
     <section id="data-description">
-        <h2>4. Data Description</h2>
+        <h2>4. Dataset Discussion</h2>
         
         <h3>Datasets Used</h3>
+
+        <li> For this final project, Ahmad and I gathered a few different datasets: our primary dataset was the <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas">
+             <strong>Food Access Research Atlas</strong></a>,prepared by the U.S. Department of Agriculture's Economic Research Service and last updated in 2019. This is 
+             an .xlsx file that tracks food deserts across the entire U.S., which we first filtered out into a new .xlsx that only contained entries related to New Jersey.
+             From there, we filtered our dataset in Colab to Camden County, which had a good variance in food deserts across census tracts and many food deserts related to vehicle-access
+             issues.
+        
+             We used New Jersey tract-level <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html"><strong>Cartographic Boundary Files</strong></a>
+             from the U.S. Census Bureau for 2019 as it matched the 2019 TIGER/Line shapefiles used in the FARA dataset, and performed a table join between the FARA dataset and
+             the CB tract files using GEOID to link food access attibutes to the tract shapes.</li>
         
         <h4>USDA Food Access Research Atlas</h4>
         <ul>

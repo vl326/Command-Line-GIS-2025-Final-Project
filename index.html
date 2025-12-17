@@ -3,65 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Food Access: Camden County</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #222; }
-        img { max-width: 100%; height: auto; border: 1px solid #ccc; margin-bottom: 10px; }
-        iframe { width: 100%; height: 500px; border: 1px solid #ccc; margin-bottom: 20px; }
-        section { margin-bottom: 50px; }
-        h1, h2 { border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .metadata { font-size: 0.9em; color: #555; }
-    </style>
 </head>
 <body>
-
     <header>
         <h1>Food Access Analysis: Camden County, NJ</h1>
-        <p class="metadata">By Vincent Lu & Ahmad Shahbaz | Rutgers 34:970:595: Command-Line GIS</p>
+        <p>By Vincent Lu & Ahmad Shahbaz | Rutgers 34:970:595: Command-Line GIS</p>
     </header>
-
+    
     <section id="introduction">
         <h2>Project Overview</h2>
         <p>This project explores the intersection of socioeconomic status and food access in Camden County, NJ, identifying areas where low income and low physical access to groceries overlap.</p>
     </section>
-
+    
     <section id="data-methodology">
         <h2>Data Methodology</h2>
-        <p><strong>Sources & Preparation:</strong> Data was sourced from the <strong>USDA Food Access Research Atlas</strong> (2019), the <strong>US Census Bureau</strong> (ACS 5-Year Estimates, 2015-2019), and <strong>NJ Transit Open Data</strong>[cite: 15, 16]. Census data was accessed via the <code>tidycensus</code> and <code>cenpy</code> libraries.</p>
+        <p><strong>Sources & Preparation:</strong> Data was sourced from the <strong>USDA Food Access Research Atlas</strong> (2019), the <strong>US Census Bureau</strong> (ACS 5-Year Estimates, 2015-2019), and <strong>NJ Transit Open Data</strong>. Census data was accessed via the <code>tidycensus</code> and <code>cenpy</code> libraries.</p>
         
-        <p><strong>Processing:</strong> The original data was in GeoJSON and CSV formats[cite: 17]. To make the data mappable, we performed a <strong>spatial join</strong> between NJ Transit bus stop point data and Census Tract polygons to calculate transit density[cite: 17, 24]. We also aggregated retail points from OpenStreetMap using <code>osmnx</code>[cite: 17].</p>
+        <p><strong>Processing:</strong> The original data was in GeoJSON and CSV formats[cite: 17]. To make the data mappable, we performed a <strong>spatial join</strong> between NJ Transit bus stop point data and Census Tract polygons to calculate transit density. We also aggregated retail points from OpenStreetMap using <code>osmnx</code>.</p>
         
         <p><strong>Quality & Reliability:</strong> We addressed data quality by filtering for <strong>Coefficient of Variation (CV)</strong>. Any Census variables with a $CV \ge 40$ were symbolized as "unreliable" or excluded to ensure statistical integrity[cite: 18, 21].</p>
     </section>
-
+    
     <section id="static-maps">
         <h2>Static Analysis</h2>
-        <p>These curated views provide a baseline for understanding demographic distribution in the county[cite: 8, 19].</p>
+        <p>These curated views provide a baseline for understanding demographic distribution in the county.</p>
         
         <h3>Median Income & Census Tracts</h3>
         <img src="map1_median_income.png" alt="Map of Median Income by Census Tract">
-        <p><em>Figure 1: Median household income by tract. Hatched areas represent data with high CV or missing values[cite: 21, 23].</em></p>
-
+        <p><em>Figure 1: Median household income by tract. Hatched areas represent data with high CV or missing values.</em></p>
+        
         <h3>Demographics & Transit Access</h3>
         <img src="map3_vehicle_access_transit.png" alt="Map of Vehicle Access and Transit">
-        <p><em>Figure 2: This map uses a spatial join to show the density of transit stops relative to households without vehicle access[cite: 23, 24].</em></p>
+        <p><em>Figure 2: This map uses a spatial join to show the density of transit stops relative to households without vehicle access.</em></p>
     </section>
-
+    
     <section id="interactive-map">
         <h2>Interactive Exploration</h2>
-        <p>Use the map below to explore specific data points, including bus stop locations and specific tract-level poverty rates[cite: 6, 28].</p>
+        <p>Use the map below to explore specific data points, including bus stop locations and specific tract-level poverty rates.</p>
         
         <iframe src="interactive_map2_multilayer.html" title="Interactive Food Access Map"></iframe>
+        
         <ul>
-            <li><strong>Hover:</strong> View quick stats on poverty rates[cite: 30].</li>
-            <li><strong>Click:</strong> View detailed demographic breakdowns and transit counts[cite: 31].</li>
-            <li><strong>Layers:</strong> Toggle between the USDA Food Desert classification and OSM Grocery locations using the control in the top-right[cite: 29, 32].</li>
+            <li><strong>Hover:</strong> View quick stats on poverty rates.</li>
+            <li><strong>Click:</strong> View detailed demographic breakdowns and transit counts.</li>
+            <li><strong>Layers:</strong> Toggle between the USDA Food Desert classification and OSM Grocery locations using the control in the top-right.</li>
         </ul>
     </section>
-
+    
     <footer>
         <hr>
-        <p class="metadata">Final Project - Fall 2025 [cite: 13]</p>
+        <p>Final Project - Fall 2025</p>
     </footer>
-
 </body>
 </html>

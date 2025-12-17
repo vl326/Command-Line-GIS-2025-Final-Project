@@ -133,15 +133,34 @@
         
         <h3>Datasets Used</h3>
 
-        <li> For this final project, Ahmad and I gathered a few different datasets: our primary dataset was the <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas">
-             <strong>Food Access Research Atlas</strong></a>,prepared by the U.S. Department of Agriculture's Economic Research Service and last updated in 2019. This is 
-             an .xlsx file that tracks food deserts across the entire U.S., which we first filtered out into a new .xlsx that only contained entries related to New Jersey.
-             From there, we filtered our dataset in Colab to Camden County, which had a good variance in food deserts across census tracts and many food deserts related to vehicle-access
-             issues.
+        For this final project, Ahmad and I gathered a few different datasets: our primary dataset was the <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas">
+        <strong>Food Access Research Atlas</strong></a>,prepared by the U.S. Department of Agriculture's Economic Research Service and last updated in 2019. This is 
+        an .xlsx file that tracks food deserts across the entire U.S., which we first filtered out into a new .xlsx that only contained entries related to New Jersey.
+        From there, we filtered our dataset in Colab to Camden County, which had a good variance in food deserts across census tracts and many food deserts related to vehicle-access
+        issues.<br><br>
         
-             We used New Jersey tract-level <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html"><strong>Cartographic Boundary Files</strong></a>
-             from the U.S. Census Bureau for 2019 as it matched the 2019 TIGER/Line shapefiles used in the FARA dataset, and performed a table join between the FARA dataset and
-             the CB tract files using GEOID to link food access attibutes to the tract shapes.</li>
+        We used New Jersey tract-level <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html"><strong>Cartographic Boundary Files</strong></a>
+        from the U.S. Census Bureau for 2019 as it matched the 2019 TIGER/Line shapefiles used in the FARA dataset, and performed a table join between the FARA dataset and
+        the CB tract files using GEOID to link food access attibutes to the tract shapes.<br><br>
+
+        We also used a variety of supplmentary datasets such as the <strong>American Community Survey 5-Year Estimates</strong> for 2015-2019, also from the U.S Census Bureau,
+        which was a .csv file which we accessed through the <code>tidycensus</code> and <code>cenpy</code> libraries. The census data was instrumental in helping us build
+        our static maps and interactive maps, as we examined median household income, demographics, poverty rates, and vehicle ownership, and joined ACS data to our Camden
+        geodataframe. For the static maps on median household income (MHI) and percentage of Black American residents, we calculated CV ≥ 40 for both variables, and while the map
+        on MHI turned up 0 unreliable tracts, we did find unreliable tracts and displayed them on our second static map with hatching. These two static maps generally 
+        demonstrate a correlation between low MHI and living in a food desert, and proportion of Black American citizens with the same, providing the foundation for a more
+        systemic analysis of poverty and its myriad compounding factors.<br><br>
+
+        Our other supplementary datasets we used included NJ Transit bus stop data from the <a href="https://njogis-newjersey.opendata.arcgis.com/datasets/fcb66a1ea358460bad1113e2d4ec2ec5_11/about"><strong>NJ Transit GIS Department</strong></a>,
+        most recently updated for 2025. This .geojson we sourced from Professor Payne's provided class material, and we used this for our third static map on vehicle access
+        by spatial joining this with census tract polygons to examine bus stop density in tracts. We were interested in seeing what kind of relationship existed in tracts
+        with low vehicle access or those with low vehicle access and are food deserts, and were quite surprised to find that there seemed to be an inverse relationship - tracts
+        that had low vehicle access and were food deserts had on average more NJ Transit bus stops than those that were merely low vehicle access. Of course, bus stop density
+        does not indicate anything about bus line frequency or service quality, and further investigation into those might shed more light on this relationship.<br><br>
+
+        The final dataset we used consisted of a list of food retailers that we pulled from <strong>OpenStreetMap (OSM)</strong> via the <code>osmnx</code> library,
+        consisting of point data with retail tags, which we accessed in December 2025. Though convenient to be able to pull this data through jupyter notebook, OSM
+        does not have the full breadth of coverage that its larger proprietary competitors like Google Maps have, and OSM might not have accounted for smaller retailers.
         
         <h4>USDA Food Access Research Atlas</h4>
         <ul>

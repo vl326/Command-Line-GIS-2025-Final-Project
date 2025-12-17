@@ -3,128 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Access: Camden County</title>
+    <title>Food Access | Camden County</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        h1 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
-        h2 {
-            margin-top: 40px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 8px;
-        }
-        h3 {
-            margin-top: 30px;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px 0;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: 1px solid #ddd;
-            margin: 20px 0;
-        }
-        p {
-            margin: 15px 0;
-        }
-        em {
-            display: block;
-            margin-top: 10px;
-            font-size: 0.95em;
-            color: #666;
-        }
-        ul {
-            margin: 20px 0;
-        }
-        li {
-            margin: 8px 0;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #ddd;
-            margin: 40px 0;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: "Courier New", monospace;
-        }
-        strong {
-            font-weight: 600;
-        }
+        /* Minimalist Typography and Layout */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; max-width: 750px; margin: 40px auto; padding: 0 20px; color: #24292e; }
+        h1 { font-size: 2em; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h2 { font-size: 1.5em; margin-top: 1.5em; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+        h3 { font-size: 1.2em; margin-top: 1.2em; }
+        p, ul { margin-bottom: 1em; }
+        img { max-width: 100%; height: auto; border: 1px solid #d1d5da; border-radius: 3px; }
+        iframe { width: 100%; height: 550px; border: 1px solid #d1d5da; border-radius: 3px; background: #fff; }
+        .caption { font-size: 0.85em; color: #586069; margin-top: 4px; text-align: center; }
+        .warning-box { background-color: #fffbdd; border: 1px solid #d1d5da; padding: 15px; font-size: 0.9em; margin: 20px 0; }
+        footer { margin-top: 60px; font-size: 0.8em; color: #6a737d; text-align: center; }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Food Access Analysis: Camden County, NJ</h1>
         <p><strong>Authors:</strong> Vincent Lu & Ahmad Shahbaz<br>
-        <strong>Course:</strong> Command-Line GIS (Rutgers 34:970:595, Fall 2025)</p>
+        <strong>Course:</strong> 34:970:595 Command-Line GIS</p>
     </header>
-    
-    <hr>
-    
-    <section id="introduction">
-        <h2>1. Project Overview</h2>
-        <p>This project explores the intersection of socioeconomic status and food access in Camden County, NJ, identifying areas where low income and low physical access to groceries overlap.</p>
+
+    <section>
+        <h2>1. Data Methodology</h2>
+        <p><strong>Sources:</strong> Data for this project was retrieved from the <strong>USDA Food Access Research Atlas</strong> (2019), the <strong>US Census Bureau (ACS 5-Year Estimates, 2015-2019)</strong> via the <code>cenpy</code> library, and <strong>NJ Transit Open Data</strong>[cite: 14, 15, 16].</p>
+        
+        <p><strong>Processing:</strong> Spatial data was processed using GeoPandas. Key geoprocessing steps included a <strong>spatial join</strong> between NJ Transit bus stop point features and Census Tract polygons to identify transit-rich corridors[cite: 17, 24]. Data was originally in Shapefile and CSV formats.</p>
+        
+        <div class="warning-box">
+            <strong>Data Quality Note (Requirement 3a):</strong> To ensure statistical reliability, any Census variables with a Coefficient of Variation ($CV \ge 40$) or missing values have been specifically symbolized. In the maps below, these areas are represented by a grey hatch pattern to distinguish them from low-value data.
+        </div>
     </section>
-    
-    <section id="data-methodology">
-        <h2>2. Data Methodology</h2>
-        
-        <h3>Sources & Preparation</h3>
-        <p>Data was sourced from the <strong>USDA Food Access Research Atlas</strong> (2019), the <strong>US Census Bureau</strong> (ACS 5-Year Estimates, 2015-2019), and <strong>NJ Transit Open Data</strong>. Census data was accessed via the <code>tidycensus</code> and <code>cenpy</code> libraries.</p>
-        
-        <h3>Processing</h3>
-        <p>The original data was in GeoJSON and CSV formats. To make the data mappable, we performed a <strong>spatial join</strong> between NJ Transit bus stop point data and Census Tract polygons to calculate transit density. We also aggregated retail points from OpenStreetMap using <code>osmnx</code>.</p>
-        
-        <h3>Quality & Reliability</h3>
-        <p>We addressed data quality by filtering for <strong>Coefficient of Variation (CV)</strong>. Any Census variables with a CV ≥ 40 were symbolized as "unreliable" or excluded to ensure statistical integrity.</p>
+
+    <section>
+        <h2>2. Static Geospatial Analysis</h2>
+        <h3>Socioeconomic Indicators</h3>
+        <img src="map1_median_income.png" alt="Map showing Median Household Income by Census Tract">
+        <p class="caption">Figure 1: Median Household Income at the Census Tract level. Note the hatched areas indicating unreliable or missing data ($CV \ge 40$).</p>
+
+        <h3>Transit & Vehicle Access</h3>
+        <img src="map3_vehicle_access_transit.png" alt="Map showing spatial join of transit and vehicles">
+        <p class="caption">Figure 2: Overlay of transit stop density (Spatial Join) and households without vehicle access.</p>
     </section>
-    
-    <section id="static-maps">
-        <h2>3. Static Analysis</h2>
-        <p>These curated views provide a baseline for understanding demographic distribution in the county.</p>
-        
-        <h3>Static Map 1: Median Income & Census Tracts</h3>
-        <img src="map1_median_income.png" alt="Map of Median Income by Census Tract">
-        <em>Figure 1: Median household income by tract. Hatched areas represent data with high CV or missing values.</em>
-        
-        <h3>Static Map 2: Demographics & Transit Access</h3>
-        <img src="map3_vehicle_access_transit.png" alt="Map of Vehicle Access and Transit">
-        <em>Figure 2: This map uses a spatial join to show the density of transit stops relative to households without vehicle access.</em>
-    </section>
-    
-    <section id="interactive-map">
-        <h2>4. Interactive Exploration</h2>
-        <p>Use the map below to explore specific data points, including bus stop locations and specific tract-level poverty rates.</p>
-        
-        <iframe src="interactive_map2_multilayer.html" title="Interactive Food Access Map"></iframe>
-        
-        <p><strong>Map Features:</strong></p>
+
+    <section>
+        <h2>3. Interactive Map</h2>
+        <p>The interactive map below allows for a deeper exploration of individual tract attributes[cite: 28].</p>
+        <iframe src="interactive_map2_multilayer.html" title="Interactive Multi-layer Map"></iframe>
         <ul>
-            <li><strong>Hover:</strong> View quick stats on poverty rates.</li>
-            <li><strong>Click:</strong> View detailed demographic breakdowns and transit counts.</li>
-            <li><strong>Layers:</strong> Toggle between the USDA Food Desert classification and OSM Grocery locations using the control in the top-right.</li>
+            <li><strong>Basemap:</strong> Select between light-themed or satellite views via the toggle[cite: 32].</li>
+            <li><strong>Interaction:</strong> Hover for minimal field tooltips; click for full demographic pop-ups[cite: 30, 31].</li>
+            <li><strong>Layers:</strong> Toggle between Food Desert classifications and OpenStreetMap grocery retail locations[cite: 29].</li>
         </ul>
     </section>
-    
+
     <footer>
-        <hr>
-        <p><em>Final Project - Fall 2025</em></p>
+        <p>Rutgers University | Bloustein School of Planning and Public Policy [cite: 2]</p>
     </footer>
+
 </body>
 </html>
